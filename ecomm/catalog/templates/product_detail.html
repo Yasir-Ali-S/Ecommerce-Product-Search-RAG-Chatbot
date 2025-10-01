@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.title }} - Product Details</title>
+    <link rel="stylesheet" href="/static/home.css">
+    <style>
+        .product-detail-container {
+            max-width: 700px;
+            margin: 2.5rem auto;
+            background: #fff;
+            border-radius: 18px;
+            box-shadow: 0 2px 16px rgba(168,0,119,0.08);
+            padding: 2.5rem 2rem;
+            display: flex;
+            gap: 2.5rem;
+            flex-wrap: wrap;
+        }
+        .product-detail-image {
+            flex: 1 1 220px;
+            min-width: 220px;
+            max-width: 320px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .product-detail-image img {
+            width: 100%;
+            max-width: 320px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(168,0,119,0.10);
+            background: #f7e6f7;
+            object-fit: cover;
+        }
+        .product-detail-info {
+            flex: 2 1 320px;
+            min-width: 220px;
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+        }
+        .product-detail-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #a80077;
+        }
+        .product-detail-price {
+            font-size: 1.4rem;
+            color: #28a745;
+            font-weight: 600;
+        }
+        .product-detail-meta {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            font-size: 1rem;
+            color: #666;
+        }
+        .product-detail-description {
+            font-size: 1.1rem;
+            color: #333;
+            margin: 1rem 0;
+        }
+        .product-detail-sizes {
+            font-size: 1rem;
+            color: #a80077;
+        }
+        .product-detail-stock {
+            font-size: 1rem;
+            color: #28a745;
+            font-weight: 500;
+        }
+        .product-detail-stock.out {
+            color: #dc3545;
+        }
+        .product-detail-rating {
+            font-size: 1rem;
+            color: #ffc107;
+            font-weight: 600;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 1.5rem;
+            color: #a80077;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        .back-link:hover {
+            color: #66a6ff;
+        }
+        @media (max-width: 700px) {
+            .product-detail-container {
+                flex-direction: column;
+                padding: 1.2rem 0.5rem;
+            }
+            .product-detail-image, .product-detail-info {
+                min-width: 0;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="/" class="back-link">&larr; Back to Home</a>
+    <div class="product-detail-container">
+        <div class="product-detail-image">
+            <img src="{{ product.image_url|default:'https://via.placeholder.com/320' }}" alt="{{ product.title }}">
+        </div>
+        <div class="product-detail-info">
+            <div class="product-detail-title">{{ product.title }}</div>
+            <div class="product-detail-price">₹{{ product.price }}</div>
+            <div class="product-detail-meta">
+                <span><b>Brand:</b> {{ product.brand }}</span>
+                <span><b>Category:</b> {{ product.category }}</span>
+                {% if product.color %}<span><b>Color:</b> {{ product.color }}</span>{% endif %}
+                {% if product.material %}<span><b>Material:</b> {{ product.material }}</span>{% endif %}
+            </div>
+            <div class="product-detail-description">{{ product.description }}</div>
+            {% if product.available_sizes %}
+            <div class="product-detail-sizes"><b>Available Sizes:</b> {{ product.available_sizes|join:', ' }}</div>
+            {% endif %}
+            <div class="product-detail-stock {% if not product.in_stock %}out{% endif %}">
+                {% if product.in_stock %}In Stock{% else %}Out of Stock{% endif %}
+            </div>
+            <div class="product-detail-rating">
+                <span>&#9733;</span> {{ product.rating }} ({{ product.num_reviews }} reviews)
+            </div>
+        </div>
+    </div>
+</body>
+</html> 

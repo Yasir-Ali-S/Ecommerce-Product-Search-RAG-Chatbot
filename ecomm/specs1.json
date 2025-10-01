@@ -1,0 +1,40 @@
+{
+    "goal": "In the Django project 'ragbot_project' and the app 'catalog', set up an enhanced e-commerce backend using Django REST Framework, with a richer Product model and complete REST API.",
+    "steps": [
+      "Ensure 'rest_framework' and 'catalog' are added to INSTALLED_APPS in settings.py.",
+      "Define a Product model in catalog/models.py with the following fields:",
+      " - id: AutoField (primary key)",
+      " - title: CharField, max_length=120",
+      " - description: TextField",
+      " - category: CharField, max_length=60",
+      " - price: DecimalField, max_digits=10, decimal_places=2",
+      " - image_url: URLField, blank=True, null=True",
+      " - brand: CharField, max_length=60, default='Generic'",
+      " - color: CharField, max_length=30, blank=True, null=True",
+      " - material: CharField, max_length=40, blank=True, null=True",
+      " - available_sizes: JSONField (for sizes like ['S', 'M', 'L', 'XL'])",
+      " - in_stock: BooleanField, default=True",
+      " - rating: FloatField, default=0.0",
+      " - num_reviews: IntegerField, default=0",
+      "Create a ProductSerializer in catalog/serializers.py that serializes all fields of Product.",
+      "Register the Product model in catalog/admin.py to show all fields in the admin list display.",
+      "Create a ProductViewSet in catalog/views.py using DRF's ModelViewSet, with queryset of all products and the ProductSerializer.",
+      "Add a DRF DefaultRouter in catalog/urls.py and register 'products' with the ProductViewSet, so that '/api/products/' lists all products.",
+      "Include catalog/urls.py in ragbot_project/urls.py under the '/api/' path.",
+      "Confirm that a GET request to '/api/products/' returns a list of all product records as JSON."
+    ],
+    "technologies": [
+      "django",
+      "django-rest-framework"
+    ],
+    "boilerplate": "Follow Django app best practices for project structure.",
+    "output": [
+      "catalog/models.py with advanced Product model",
+      "catalog/admin.py with enhanced admin registration",
+      "catalog/serializers.py with ProductSerializer",
+      "catalog/views.py with ProductViewSet",
+      "catalog/urls.py with DRF router",
+      "ragbot_project/urls.py with catalog API route"
+    ],
+    "notes": "Use Django 3.1+ for JSONField compatibility, or fall back to TextField if not available. The focus is to have a realistic Product model, a browsable admin, and a products endpoint for RESTful consumption. No authentication required at this phase."
+  }

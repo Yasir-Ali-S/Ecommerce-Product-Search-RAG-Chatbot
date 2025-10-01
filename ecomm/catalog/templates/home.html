@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Shopping - Home</title>
+    <link rel="stylesheet" href="/static/home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="main-navbar">
+        <div class="navbar-content">
+            <div class="navbar-left">
+                <span class="navbar-logo">Shopsy</span>
+            </div>
+            <div class="navbar-center">
+                <div class="navbar-search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" placeholder="Try Saree, Kurti or Search by Product Code">
+                </div>
+            </div>
+            <div class="navbar-right">
+                <a href="#" class="navbar-link">Become a Supplier</a>
+                <span class="navbar-divider"></span>
+                <a href="#" class="navbar-icon-link"><i class="fa-regular fa-user"></i> Profile</a>
+                <a href="#" class="navbar-icon-link"><i class="fa-solid fa-cart-shopping"></i> Cart</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Category Bar -->
+    <div class="category-bar">
+        <a href="#">Women Ethnic</a>
+        <a href="#">Men</a>
+        <a href="#">Kids</a>
+        <a href="#">Home & Kitchen</a>
+        <a href="#">Bags & Footwear</a>
+        <a href="#">Electronics</a>
+        <a href="#">Sports & Fitness</a>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-images">
+                <img src="/static/excited-happy-positive-young-indian-260nw-2103315185-removebg-preview.png" alt="Happy young Indian person" class="hero-img hero-img-left">
+                <img src="/static/excited-happy-positive-young-indian-260nw-2103315185-removebg-preview.png" alt="Happy young Indian person" class="hero-img hero-img-right">
+            </div>
+            <div class="hero-text">
+                <h1>Smart Shopping</h1>
+                <button class="shop-btn">Shop Now</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Bar -->
+    <section class="feature-bar">
+        <div class="feature"><i class="fa-solid fa-rotate-left"></i> 7 Days Easy Return</div>
+        <div class="feature"><i class="fa-solid fa-money-bill-wave"></i> Cash on Delivery</div>
+        <div class="feature"><i class="fa-solid fa-tags"></i> Lowest Prices</div>
+    </section>
+
+    <!-- Category Icons -->
+    <section class="categories">
+        <div class="category"><img src="https://i.imgur.com/3Q9Z1Zm.png" alt="Women Ethnic"><span>Women Ethnic</span></div>
+        <div class="category"><img src="https://i.imgur.com/4Q9Z1Zm.png" alt="Western Wear"><span>Western Wear</span></div>
+        <div class="category"><img src="https://i.imgur.com/5Q9Z1Zm.png" alt="Men"><span>Men</span></div>
+        <div class="category"><img src="https://i.imgur.com/6Q9Z1Zm.png" alt="Footwear"><span>Footwear</span></div>
+        <div class="category"><img src="https://i.imgur.com/7Q9Z1Zm.png" alt="Home & Living"><span>Home & Living</span></div>
+        <div class="category"><img src="https://i.imgur.com/8Q9Z1Zm.png" alt="Beauty & Health"><span>Beauty & Health</span></div>
+        <div class="category"><img src="https://i.imgur.com/9Q9Z1Zm.png" alt="Bags & Luggage"><span>Bags & Luggage</span></div>
+    </section>
+
+    <!-- All Products Section -->
+    <section id="all-products-section">
+        <h2 class="all-products-title">All Products</h2>
+        <div id="all-products-grid">
+            {% for product in products|slice:":8" %}
+            <div class="product-card-home" onclick="window.location.href='/products/{{ product.id }}/'">
+                <div class="product-card-img-wrap">
+                    <img src="{{ product.image_url|default:'https://via.placeholder.com/220' }}" alt="{{ product.title }}">
+                </div>
+                <div class="product-card-info">
+                    <div class="product-card-title" title="{{ product.title }}">{{ product.title|truncatechars:32 }}</div>
+                    <div class="product-card-brand">{{ product.brand }}</div>
+                    <div class="product-card-price-row">
+                        <span class="product-card-price">₹{{ product.price }}</span>
+                        <span class="product-card-mrp">M.R.P.: ₹{{ product.price|floatformat:0|add:"0"|floatformat:0|add:"0"|add:product.price|floatformat:0 }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Floating Chat Widget -->
+    <div id="chat-widget">
+        <div id="chat-bubble"><i class="fa-solid fa-comments"></i></div>
+        <div id="chat-window" class="hidden">
+            <div class="chat-header">
+                <span>Ask SmartShop Bot</span>
+                <button id="chat-close"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="chat-body" id="chat-body">
+                <div class="chat-message bot">Hi! 👋 How can I help you today?</div>
+            </div>
+            <form class="chat-input-bar" id="chat-form">
+                <input type="text" id="chat-input" placeholder="Type your message..." autocomplete="off">
+                <button type="submit"><i class="fa-solid fa-paper-plane"></i></button>
+            </form>
+        </div>
+    </div>
+
+    <script src="/static/home.js"></script>
+</body>
+</html> 

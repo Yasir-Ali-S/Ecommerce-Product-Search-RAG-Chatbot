@@ -1,0 +1,33 @@
+{
+    "goal": "Generate and index semantic embeddings for all products in the Django catalog using Hugging Face sentence-transformers and Pinecone Serverless.",
+    "steps": [
+      "Create a Django management command called `index_products` in the `catalog` app.",
+      "Import Product from catalog.models.",
+      "Load all relevant Pinecone credentials and settings from environment variables via os.environ: `PINECONE_API_KEY`, `PINECONE_HOST`, `PINECONE_INDEX_NAME`.",
+      "Initialize Pinecone serverless by calling `pinecone.init(api_key=PINECONE_API_KEY)` and get the index object with `index = pinecone.Index(PINECONE_INDEX_NAME, host=PINECONE_HOST)`.",
+      "Load the 'all-MiniLM-L6-v2' model from sentence-transformers.",
+      "For every Product in the DB, concatenate title and description to form the text for embedding.",
+      "Generate a 384-dimensional embedding vector for each product using the model.",
+      "Upsert the embeddings to the Pinecone index, using product.id as the vector ID. Store metadata: title, description, category, brand.",
+      "After all upserts, print a success message including the number of indexed products.",
+      "Handle error cases if environment variables are missing or vector upsert fails, and print clear error messages."
+    ],
+    "technologies": [
+      "django",
+      "sentence-transformers",
+      "pinecone-client"
+    ],
+    "inputs": [
+      "Environment variables: `PINECONE_API_KEY`, `PINECONE_HOST`, `PINECONE_INDEX_NAME`.",
+      "Product data from the Django database."
+    ],
+    "output": [
+      "Django management command (run as `python manage.py index_products`) which uploads all product vectors and metadata to Pinecone serverless index."
+    ],
+    "notes": [
+      "Do not hardcode any credentials; all must be loaded from environment.",
+      "Model embedding output size is 384; the Pinecone index must be set to that dimension.",
+      "Command should be 'safe to repeat' and update or add as needed. Do not delete the index in this command.",
+      "Add clear logging for progress and errors."
+    ]
+  }

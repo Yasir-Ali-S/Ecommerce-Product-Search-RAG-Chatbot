@@ -1,0 +1,35 @@
+{
+    "goal": "Implement a semantic product search API endpoint in Django that uses Hugging Face embeddings and Pinecone vector search to return the most relevant products for a user's natural language query.",
+    "steps": [
+      "Create a Django REST API POST endpoint at `/api/chat/` in an appropriate app.",
+      "Accept a JSON body with a `question` field (user's search query). Validate that it is present and non-empty.",
+      "Load the same sentence-transformer model ('all-MiniLM-L6-v2') used for product embeddings, ensuring weights are available.",
+      "Generate an embedding vector for the incoming user question.",
+      "Configure Pinecone using environment variables: `PINECONE_API_KEY`, `PINECONE_HOST`, `PINECONE_INDEX_NAME`.",
+      "Query Pinecone with the user question embedding for the top 3 (or 5) most similar product vectors.",
+      "Retrieve the matching product IDs from the Pinecone response.",
+      "Look up those product IDs in the Django database to fetch full product details.",
+      "Return a JSON response with a message (e.g. 'Based on our catalog...'), and a products list of the matching items including id, title, description, category, price, and brand.",
+      "Optionally, for a bonus, send the context (query plus product data) to an LLM and add a conversational answer in the response.",
+      "Implement error handling for missing environment variables, Pinecone/network issues, and embedding/model errors, and return appropriate error messages."
+    ],
+    "technologies": [
+      "django",
+      "djangorestframework",
+      "sentence-transformers",
+      "pinecone-client"
+    ],
+    "inputs": [
+      "Environment variables: `PINECONE_API_KEY`, `PINECONE_HOST`, `PINECONE_INDEX_NAME`.",
+      "User-submitted search query from API POST request."
+    ],
+    "output": [
+      "A Django REST API endpoint `/api/chat/` that, given a user question, returns semantically relevant products as JSON, using Pinecone and sentence-transformers."
+    ],
+    "notes": [
+      "Credentials and configuration must use environment variables, never hardcoded.",
+      "The API should be robust and gracefully handle errors such as missing model, Pinecone downtime, or no results found.",
+      "For the bonus conversational mode, use a lightweight LLM locally or a simple call to OpenAI, but keep it optional for the main spec.",
+      "Response JSON should have a clear structure and suitable status codes for both success and error scenarios."
+    ]
+  }

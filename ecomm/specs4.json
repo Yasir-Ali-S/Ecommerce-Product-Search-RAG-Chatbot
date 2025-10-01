@@ -1,0 +1,40 @@
+{
+    "goal": "Build a visually appealing, user-friendly, and modular single-page web app with a chat interface for semantic product discovery, using separate files for HTML, CSS, and JavaScript.",
+    "steps": [
+      "Create an index.html containing the page structure and layout. Use Bootstrap 5 for styling and layout classes, but keep custom CSS external.",
+      "Write a custom styles.css file for theme variables, color adjustments, and finer design tweaks (such as chat bubbles, product cards, and animations). Link this file in the HTML head.",
+      "Develop a main.js file to handle user input, API calls to /api/chat/, DOM updates for chat and product recommendations, chat history management, loading states, and error presentation.",
+      "Design a header in index.html that includes the site name (e.g., 'SmartShop AI'), a logo or brand icon, and a clear descriptive tagline.",
+      "Below the header, include a main homepage section that briefly explains what the tool does and instructions to start chatting. Hide or collapse this section once the user sends their first message.",
+      "Add a Bootstrap card or similar container for the chat interface. Use two distinct styles for chat bubbles: right-aligned blue for user messages, left-aligned neutral for AI.",
+      "Create a container area beneath each AI answer to render a set of beautifully styled product cards (with placeholders for images, or real ones if available).",
+      "At the bottom of the viewport, show a fixed chat input bar with a text input and send button.",
+      "Ensure main.js submits user questions via AJAX to /api/chat/ and updates the chat and product card areas dynamically. Show a spinner animation during request processing.",
+      "On desktop, keep a spacious and inviting layout with cards and chat neatly centered. On mobile, ensure all elements stack and resize correctly using Bootstrap's grid and utilities.",
+      "Show a clear error message (styled as a chat bubble) in the chat stream if the backend returns an error or the request fails.",
+      "Optionally, add smooth fade-in animations for messages and new product cards."
+    ],
+    "technologies": [
+      "HTML5 (index.html)",
+      "Bootstrap 5 (CDN or installed)",
+      "Custom CSS (styles.css)",
+      "JavaScript (main.js)",
+      "Font Awesome or similar for icons (optional)"
+    ],
+    "inputs": [
+      "User question entered in the chat input (index.html → main.js).",
+      "API responses from /api/chat/ (main.js inserts into DOM)."
+    ],
+    "output": [
+      "A professional, modular, and responsive web UI for chatting with the AI assistant and viewing recommended products, crafted with separate HTML, CSS, and JS files."
+    ],
+    "notes": [
+      "No CSS or JS should be inlined directly in the HTML except essential Bootstrap and polyfill CDN tags.",
+      "All scripts should be loaded with defer or at the end of the body for performance.",
+      "Use semantic element tags (header, main, footer, section) for structure and accessibility.",
+      "Attach styles.css and main.js via <link> and <script> in index.html.",
+      "Keep all custom UI styling in styles.css; Bootstrap should be the primary foundation for layout and responsiveness.",
+      "Insert chat bubbles and product cards into designated containers created in the HTML."
+    ],
+    "user_pov": "When users enter the site, they see a beautiful homepage explaining the AI shopping assistant. The chat UI feels modern and approachable, with product recommendations appearing after each question as stylish cards. The site works flawlessly on both desktop and mobile, keeping the conversation history and recommendations visually distinct and easy to browse."
+  }
